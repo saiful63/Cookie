@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div>
+    <input type="button" value="Set Name cookie" onclick="setCookie('name','Saiful Islam',2)">
+  </div>
+
+  <div>
+    <input type="button" value="Set Username cookie" onclick="setCookie('username','Saiful',2)">
+  </div>
+
+  <div>
+    <input type="button" value="Get Name cookie" onclick="alert(getCookie('name'))">
+  </div>
+
+  <div>
+    <input type="button" value="Get username cookie" onclick="alert(getCookie('username'))">
+  </div>
+
+  <div>
+    <input type="button" value="Check username cookie" onclick="checkCookie('username')">
+  </div>
+
+  <div>
+    <input type="button" value="Check age cookie" onclick="checkCookie('age',2)">
+  </div>
+
+<script>
+  
+ function setCookie(cname, cvalue, exdays){
+    let d = new Date();
+    d.setTime(d.getTime() + exdays * 60 * 60 * 1000);
+    let expiary = "expire=" + d.toUTCString();
+
+    document.cookie = cname + "=" + cvalue + ";" + expiary + ";path=/";
+ }
+
+
+ function getCookie(cname){
+    let ca = document.cookie.split(";");
+    let name = cname + "=";
+    for(let i=0; i<ca.length; i++){
+      let c=ca[i];
+
+      while(c.charAt(0) === " "){
+        c = c.substring(1);
+      }
+      if(c.indexOf(name) === 0){
+        return c.substring(name.length);
+      }
+    }
+    return "";
+ }
+
+
+ function checkCookie(cname,exdays){
+   let cookieName = getCookie(cname);
+   if(cookieName != ""){
+    alert("Welcome again " + cookieName);
+   }else{
+    let age  = prompt("Enter your age","");
+    if( age != "" && age != null){
+      setCookie(cname,age,exdays);
+    }
+   }
+ }
+  
+
+</script>
+</body>
+</html>
